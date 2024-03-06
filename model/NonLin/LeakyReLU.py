@@ -3,7 +3,7 @@ import torch.nn as nn
 
 
 class LeakyReLU(nn.Module):
-    def __init__(self, negative_slope: float = 1e-2) -> None:
+    def __init__(self, negative_slope: float = 1e-2):
         super().__init__()
         self.negative_slope = negative_slope
         self.register_buffer(
@@ -12,8 +12,8 @@ class LeakyReLU(nn.Module):
             persistent=False,
         )
 
-    def forward(self, input: torch.Tensor) -> torch.Tensor:
-        return torch.where(input >= 0.0, input, input * self.negative_slope)
+    def forward(self, x):
+        return torch.where(x >= 0.0, x, x * self.negative_slope)
 
     def extra_repr(self) -> str:
         return f"negative_slope={self.negative_slope}"
